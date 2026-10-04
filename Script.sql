@@ -44,25 +44,50 @@ SELECT ROUND(AVG(replacement_cost),2) FROM film;
 SELECT SUM(replacement_cost) FROM film;
 
 -- GROUP BY, HAVING
-SELECT customer_id,staff_id,SUM(amount) FROM payment GROUP BY staff_id,customer_id ORDER BY customer_id;
-SELECT DATE(payment_date),SUM(amount) FROM payment GROUP BY DATE(payment_date) ORDER BY SUM(amount) DESC;
+SELECT customer_id,staff_id,SUM(amount) FROM payment GROUP BY staff_id,customer_id 
+ORDER BY customer_id;
+
+SELECT DATE(payment_date),SUM(amount) FROM payment GROUP BY DATE(payment_date)
+ORDER BY SUM(amount) DESC;
+
 SELECT staff_id,COUNT(amount) FROM payment GROUP BY staff_id ORDER BY COUNT(amount) DESC;
-SELECT rating,ROUND(AVG(replacement_cost),2) FROM film GROUP BY rating ORDER BY AVG(replacement_cost) DESC;
-SELECT customer_id,SUM(amount) FROM payment GROUP BY customer_id ORDER BY SUM(amount) DESC LIMIT 5;
+
+SELECT rating,ROUND(AVG(replacement_cost),2) FROM film GROUP BY rating 
+ORDER BY AVG(replacement_cost) DESC;
+
+SELECT customer_id,SUM(amount) FROM payment GROUP BY customer_id 
+ORDER BY SUM(amount) DESC LIMIT 5;
+
 
 -- CHALLENGE
 SELECT customer_id,SUM(amount) FROM payment GROUP BY customer_id HAVING SUM(amount) > 100;
 SELECT store_id, COUNT(*) from customer GROUP BY store_id HAVING COUNT(*) > 300;
 SELECT customer_id,COUNT(*) FROM payment GROUP BY customer_id HAVING COUNT(*) >= 40;
-SELECT customer_id,staff_id,SUM(amount) FROM payment WHERE staff_id = 2 GROUP BY customer_id,staff_id HAVING SUM(amount) > 100;
+
+SELECT customer_id,staff_id,SUM(amount) FROM payment WHERE staff_id = 2 
+GROUP BY customer_id,staff_id HAVING SUM(amount) > 100;
 
 -- ASSESMENT TEST 1
-SELECT customer_id,SUM(amount) FROM payment WHERE staff_id = 2 GROUP BY customer_id HAVING SUM(amount) >= 110;
+SELECT customer_id,SUM(amount) FROM payment WHERE staff_id = 2 GROUP BY customer_id 
+HAVING SUM(amount) >= 110;
+
 SELECT COUNT(title) FROM film WHERE title LIKE 'J%';
-SELECT NamMAX(customer_id) FROM customer WHERE address_id < 500 AND first_name LIKE 'E%';
 
--- JOINS
+SELECT first_name,last_name,customer_id FROM customer WHERE address_id < 500 
+AND first_name LIKE 'E%' ORDER BY customer_id DESC LIMIT 1;
 
+-- AS
+SELECT customer_id,SUM(amount) AS total_spent FROM payment GROUP BY customer_id 
+HAVING SUM(amount) > 100;
 
+-- INNER JOIN
+SELECT payment_id,payment.customer_id,first_name FROM payment INNER JOIN customer 
+ON payment.customer_id = customer.customer_id;
+
+-- FULL OUTER JOINS
+SELECT * FROM customer FULL OUTER JOIN payment ON customer.customer_id = payment.customer_id 
+WHERE customer.customer_id IS null OR payment.payment_id IS null;
+
+-- LEFT JOIN
 
 
