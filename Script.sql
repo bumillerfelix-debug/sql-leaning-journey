@@ -128,3 +128,19 @@ INNER JOIN film ON film_actor.film_id = film.film_id
 WHERE first_name = 'Nick' AND last_name = 'Wahlberg';
 
 
+-- TIMESTAMPS AND EXTRACT 
+SHOW ALL; SHOW TIMEZONE; SELECT NOW(); SELECT TIMEOFDAY(); SELECT CURRENT_DATE;
+SELECT EXTRACT(YEAR FROM payment_date) AS year FROM payment;
+SELECT AGE(payment_date) FROM payment;
+SELECT TO_CHAR(payment_date,'dd/MM-YYYY') FROM payment;
+
+
+-- CHALLENGE TIMESTAMPS AND EXTRACT
+SELECT DISTINCT(TO_CHAR(payment_date,'MONTH')) FROM payment;
+SELECT COUNT(payment_date) FROM payment 
+WHERE EXTRACT(dow FROM payment_date AT TIME ZONE 'Europe/Berlin') = 1; 
+
+
+-- MATHEMATICAL FUNCTIONS AND OPERATORS
+
+
