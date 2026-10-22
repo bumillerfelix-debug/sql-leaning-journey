@@ -101,11 +101,33 @@ INSERT INTO employees(first_name,last_name,birthdate,hire_date,salary)
 VALUES('Sammy','Smith','1990-11-03','2010-01-01',100);
 
 SELECT * FROM employees;
+
+
+-- NULLIF
+CREATE TABLE depts(first_name VARCHAR(50), department VARCHAR(50))
+INSERT INTO depts(first_name,department) VALUES('Vinton','A'),('Lauren','A'),('Claire','B');
+SELECT * FROM depts;
+
+SELECT(
+SUM(Case WHEN department = 'A' THEN 1 ELSE 0 END)/
+SUM(CASE WHEN department = 'B' THEN 1 ELSE 0 END)
+) AS department_ratio FROM depts;
+
+DELETE FROM depts WHERE department = 'B';
+SELECT * FROM department;
+*/
+SELECT(
+SUM(Case WHEN department = 'A' THEN 1 ELSE 0 END)/
+NULLIF(SUM(CASE WHEN department = 'B' THEN 1 ELSE 0 END),0)
+) AS department_ratio FROM depts;
+
+
+-- IMPORT AND EXPORT
+/*
+CREATE TABLE simple(a INT,b iNT,c INT)
 */
 
-
-
-
+SELECT * FROM simple;
 
 
 
